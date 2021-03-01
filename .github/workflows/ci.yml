@@ -1,0 +1,33 @@
+name: ci
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:11
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Elixir
+        uses: actions/setup-node@v1
+        with:
+          otp-version: '23.0'
+          elixir-version: '1.11.1'
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Test
+        run: mix test
