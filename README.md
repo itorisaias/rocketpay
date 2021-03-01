@@ -1,4 +1,5 @@
 # Rocketpay
+[![ci](https://github.com/itorisaias/rocketpay/actions/workflows/ci.yml/badge.svg)](https://github.com/itorisaias/rocketpay/actions/workflows/ci.yml)
 
 To start your Phoenix server:
 

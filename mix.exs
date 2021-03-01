@@ -55,15 +55,11 @@ defmodule Rocketpay.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
 
-      # cripografias
-      {:bcrypt_elixir, "~> 2.0"},
       {:argon2_elixir, "~> 2.0"},
 
-      # Envio de e-mail -> verificar atualizacao do bamboo_smtp para dar upgrade de versao
       {:bamboo, "~> 1.7.0"},
       {:bamboo_smtp, "~> 3.1.3"},
 
-      # Autenticacao
       {:guardian, "~> 2.0"}
     ]
   end
