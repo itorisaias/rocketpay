@@ -2,7 +2,7 @@ defmodule Rocketpay.Users.CreateTest do
   use Rocketpay.DataCase, async: true
   use Bamboo.Test
 
-  alias Rocketpay.{Repo, User, Factory}
+  alias Rocketpay.{Factory, Repo, User}
   alias Rocketpay.Users.Create
 
   describe "call/1" do

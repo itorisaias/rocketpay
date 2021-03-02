@@ -1,6 +1,6 @@
 defmodule Rocketpay.Accounts.Deposit do
-  alias Rocketpay.Repo
   alias Rocketpay.Accounts.Operation
+  alias Rocketpay.Repo
 
   def call(params) do
     params

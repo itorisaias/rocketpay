@@ -1,7 +1,7 @@
 defmodule RocketpayWeb.UsersControllerTest do
   use RocketpayWeb.ConnCase, async: true
 
-  alias Rocketpay.{User, Factory}
+  alias Rocketpay.{Factory, User}
 
   describe "create/2" do
     test "when all params are valid, create user", %{conn: conn} do

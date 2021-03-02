@@ -1,8 +1,8 @@
 defmodule RocketpayWeb.AccountsControllerTest do
   use RocketpayWeb.ConnCase, async: true
 
-  alias RocketpayInfra.Guardian
   alias Rocketpay.Factory
+  alias RocketpayInfra.Guardian
 
   describe "deposit/2" do
     setup %{conn: conn} do
