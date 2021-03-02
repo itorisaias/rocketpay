@@ -2,7 +2,7 @@ defmodule Rocketpay.Users.AuthenticateTest do
   use Rocketpay.DataCase, async: true
 
   alias Rocketpay.{Factory, User}
-  alias Rocketpay.Users.{Authenticate, Create}
+  alias Rocketpay.Users.Authenticate
 
   describe "call/1" do
     test "when password valid, return user" do

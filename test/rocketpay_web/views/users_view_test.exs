@@ -3,7 +3,7 @@ defmodule RocketpayWeb.UsersViewTest do
 
   import Phoenix.View
 
-  alias Rocketpay.{Account, Factory, User}
+  alias Rocketpay.Factory
   alias RocketpayInfra.Guardian
   alias RocketpayWeb.UsersView
 
