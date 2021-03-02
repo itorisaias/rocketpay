@@ -1,15 +1,12 @@
 defmodule RocketpayWeb.UsersControllerTest do
   use RocketpayWeb.ConnCase, async: true
+  import Rocketpay.Factory.User
+  alias Rocketpay.User
 
   describe "create/2" do
     test "when all params are valid, create user", %{conn: conn} do
-      params = %{
-        "age" => 18,
-        "email" => "itorzin@gmail.com",
-        "name" => "Itor Isais da Silva",
-        "nickname" => "itorzin",
-        "password" => "123456"
-      }
+      params = build(:user_request)
+      %{"name" => name, "nickname" => nickname} = params
 
       response =
         conn
@@ -22,29 +19,16 @@ defmodule RocketpayWeb.UsersControllerTest do
                  "account" => %{
                    "balance" => "0.00"
                  },
-                 "name" => "Itor Isais da Silva",
-                 "nickname" => "itorzin"
+                 "name" => ^name,
+                 "nickname" => ^nickname
                }
              } = response
     end
 
     test "when trying to create a user with an existing email, return error", %{conn: conn} do
-      {:ok, _user} =
-        Rocketpay.create_user(%{
-          age: 18,
-          email: "itorisaias@gmail.com",
-          name: "Itor Isais da Silva",
-          nickname: "itorisaias",
-          password: "123456"
-        })
+      %User{email: email} = insert(:user)
 
-      params = %{
-        "age" => 25,
-        "email" => "itorisaias@gmail.com",
-        "name" => "Itor Isaias",
-        "nickname" => "itor.isaias",
-        "password" => "123456"
-      }
+      params = build(:user_request, %{"email" => email})
 
       response =
         conn
@@ -57,22 +41,9 @@ defmodule RocketpayWeb.UsersControllerTest do
     end
 
     test "when trying to create a user with an existing nickname, return error", %{conn: conn} do
-      {:ok, _user} =
-        Rocketpay.create_user(%{
-          age: 18,
-          email: "itorisaias@gmail.com",
-          name: "Itor Isais da Silva",
-          nickname: "itorisaias",
-          password: "123456"
-        })
+      %User{nickname: nickname} = insert(:user)
 
-      params = %{
-        "age" => 25,
-        "email" => "itor.isaias.outro@gmail.com",
-        "name" => "Itor Isaias",
-        "nickname" => "itorisaias",
-        "password" => "123456"
-      }
+      params = build(:user_request, %{"nickname" => nickname})
 
       response =
         conn
@@ -85,13 +56,7 @@ defmodule RocketpayWeb.UsersControllerTest do
     end
 
     test "when the password is less than, return error", %{conn: conn} do
-      params = %{
-        "age" => 25,
-        "email" => "itor.isaias.outro@gmail.com",
-        "name" => "Itor Isaias",
-        "nickname" => "itorisaias",
-        "password" => "12345"
-      }
+      params = build(:user_request, %{"password" => "12345"})
 
       response =
         conn
@@ -106,19 +71,9 @@ defmodule RocketpayWeb.UsersControllerTest do
 
   describe "sign_in/2" do
     test "when all params are valid, return a token", %{conn: conn} do
-      {:ok, _user} =
-        Rocketpay.create_user(%{
-          "age" => 18,
-          "email" => "itorzin@gmail.com",
-          "name" => "Itor Isais da Silva",
-          "nickname" => "itorzin",
-          "password" => "123456"
-        })
+      %User{email: email, password: password} = insert(:user)
 
-      params = %{
-        "email" => "itorzin@gmail.com",
-        "password" => "123456"
-      }
+      params = %{"email" => email, "password" => password}
 
       response =
         conn
@@ -129,19 +84,9 @@ defmodule RocketpayWeb.UsersControllerTest do
     end
 
     test "when there are params invalid, return error", %{conn: conn} do
-      {:ok, _user} =
-        Rocketpay.create_user(%{
-          "age" => 18,
-          "email" => "itorzin@gmail.com",
-          "name" => "Itor Isais da Silva",
-          "nickname" => "itorzin",
-          "password" => "123456"
-        })
+      %User{email: email} = insert(:user)
 
-      params = %{
-        "email" => "itorzin@gmail.com",
-        "password" => "invalid_password"
-      }
+      params = %{"email" => email, "password" => "invalid_password"}
 
       response =
         conn
@@ -152,19 +97,7 @@ defmodule RocketpayWeb.UsersControllerTest do
     end
 
     test "when email not found, return error", %{conn: conn} do
-      {:ok, _user} =
-        Rocketpay.create_user(%{
-          "age" => 18,
-          "email" => "itorzin@gmail.com",
-          "name" => "Itor Isais da Silva",
-          "nickname" => "itorzin",
-          "password" => "123456"
-        })
-
-      params = %{
-        "email" => "itor.naoexiste@gmail.com",
-        "password" => "123456"
-      }
+      params = %{"email" => "email_not_found@examplo.com", "password" => "123456"}
 
       response =
         conn

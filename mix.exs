@@ -32,7 +32,7 @@ defmodule Rocketpay.MixProject do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/factory"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -54,6 +54,8 @@ defmodule Rocketpay.MixProject do
 
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
+      {:ex_machina, "~> 2.6.0", only: :test},
+      {:faker, "~> 0.16", only: :test},
 
       {:argon2_elixir, "~> 2.0"},
 

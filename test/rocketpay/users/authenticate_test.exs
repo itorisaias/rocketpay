@@ -1,58 +1,31 @@
 defmodule Rocketpay.Users.AuthenticateTest do
   use Rocketpay.DataCase, async: true
 
-  alias Rocketpay.User
+  alias Rocketpay.{User, Factory}
   alias Rocketpay.Users.{Create, Authenticate}
 
   describe "call/1" do
     test "when password valid, return user" do
-      params = %{
-        name: "itor",
-        password: "123456",
-        nickname: "itor.isaias",
-        email: "itor.isaias@gmail.com",
-        age: 22
-      }
+      %User{email: email, password: password, id: user_id} = Factory.User.insert(:user)
 
-      {:ok, %User{id: user_id}} = Create.call(params)
+      {:ok, user} = %{"email" => email, "password" => password} |> Authenticate.call()
 
-      {:ok, user} =
-        %{"email" => params.email, "password" => params.password} |> Authenticate.call()
-
-      assert %User{name: "itor", age: 22, id: ^user_id} = user
+      assert %User{id: ^user_id} = user
     end
 
     test "when password invalid, return error" do
-      params = %{
-        name: "itor",
-        password: "123456",
-        nickname: "itor.isaias",
-        email: "itor.isaias@gmail.com",
-        age: 22
-      }
-
-      Create.call(params)
+      %User{email: email} = Factory.User.insert(:user)
 
       {:error, reason} =
-        %{"email" => params.email, "password" => "invalid_password"}
+        %{"email" => email, "password" => "invalid_password"}
         |> Authenticate.call()
 
       assert reason == :invalid_credentials
     end
 
     test "when email no exist, return error" do
-      params = %{
-        name: "itor",
-        password: "123456",
-        nickname: "itor.isaias",
-        email: "itor.isaias@gmail.com",
-        age: 22
-      }
-
-      Create.call(params)
-
       {:error, reason} =
-        %{"email" => "not_found@gmail.com", "password" => params.password}
+        %{"email" => "user_not_found@email.com", "password" => "123456"}
         |> Authenticate.call()
 
       assert reason == :invalid_credentials

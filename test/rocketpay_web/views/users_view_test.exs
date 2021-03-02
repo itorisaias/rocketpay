@@ -3,21 +3,12 @@ defmodule RocketpayWeb.UsersViewTest do
 
   import Phoenix.View
 
-  alias Rocketpay.{Account, User}
+  alias Rocketpay.{Account, User, Factory}
   alias RocketpayInfra.Guardian
   alias RocketpayWeb.UsersView
 
   test "renders create.json" do
-    user_params = %{
-      name: "itor",
-      password: "123456",
-      nickname: "itor.isaias",
-      email: "itor.isaias@gmail.com",
-      age: 22
-    }
-
-    {:ok, %User{id: user_id, account: %Account{id: account_id}} = user} =
-      Rocketpay.create_user(user_params)
+    user = Factory.User.insert(:user)
 
     response = render(UsersView, "create.json", user: user)
 
@@ -25,12 +16,12 @@ defmodule RocketpayWeb.UsersViewTest do
       message: "User created",
       user: %{
         account: %{
-          balance: Decimal.new("0.00"),
-          id: account_id
+          balance: user.account.balance,
+          id: user.account.id
         },
-        id: user_id,
-        name: "itor",
-        nickname: "itor.isaias"
+        id: user.id,
+        name: user.name,
+        nickname: user.nickname
       }
     }
 
@@ -38,13 +29,8 @@ defmodule RocketpayWeb.UsersViewTest do
   end
 
   test "renders authenticate.json" do
-    {:ok, user} = Rocketpay.create_user(%{
-      name: "itor",
-      password: "123456",
-      nickname: "itor.isaias",
-      email: "itor.isaias@gmail.com",
-      age: 22
-    })
+    user = Factory.User.insert(:user)
+
     {:ok, token, _clains} = Guardian.encode_and_sign(user)
 
     response = render(UsersView, "authenticate.json", token: token)
