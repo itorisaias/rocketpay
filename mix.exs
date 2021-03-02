@@ -56,6 +56,7 @@ defmodule Rocketpay.MixProject do
       {:excoveralls, "~> 0.10", only: :test},
       {:ex_machina, "~> 2.6.0", only: :test},
       {:faker, "~> 0.16", only: :test},
+      {:sobelow, "~> 0.8", only: :dev},
       {:argon2_elixir, "~> 2.0"},
       {:bamboo, "~> 1.7.0"},
       {:bamboo_smtp, "~> 3.1.3"},
