@@ -1,6 +1,8 @@
 defmodule RocketpayWeb.ErrorView do
   use RocketpayWeb, :view
+
   import Ecto.Changeset, only: [traverse_errors: 2]
+
   alias Ecto.Changeset
 
   # If you want to customize a particular status code

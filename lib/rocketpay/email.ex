@@ -3,6 +3,7 @@ defmodule Rocketpay.Email do
     view: RocketpayWeb.Email.UserView
 
   import Bamboo.Email
+
   alias Rocketpay.User
 
   def welcome_email(%User{name: name, email: email} = user) do

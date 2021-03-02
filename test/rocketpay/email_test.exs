@@ -1,5 +1,6 @@
 defmodule Rocketpay.EmailTest do
   use ExUnit.Case
+
   import Rocketpay.Factory.User
 
   test "welcome_email/1" do

@@ -2,25 +2,17 @@ defmodule RocketpayWeb.AccountsControllerTest do
   use RocketpayWeb.ConnCase, async: true
 
   alias RocketpayInfra.Guardian
-  alias Rocketpay.{Account, User}
+  alias Rocketpay.Factory
 
   describe "deposit/2" do
     setup %{conn: conn} do
-      user_params = %{
-        name: "itor",
-        password: "123456",
-        nickname: "itor.isaias",
-        email: "itor.isaias@gmail.com",
-        age: 22
-      }
-
-      {:ok, %User{account: %Account{id: account_id}} = user} = Rocketpay.create_user(user_params)
+      user = Factory.User.insert(:user)
 
       {:ok, token, _clains} = Guardian.encode_and_sign(user)
 
       conn = put_req_header(conn, "authorization", "Bearer #{token}")
 
-      {:ok, conn: conn, account_id: account_id}
+      {:ok, conn: conn, account_id: user.account.id}
     end
 
     test "when all params are valid, make the deposit", %{conn: conn, account_id: account_id} do
@@ -53,22 +45,15 @@ defmodule RocketpayWeb.AccountsControllerTest do
 
   describe "withdraw/v2" do
     setup %{conn: conn} do
-      user_params = %{
-        name: "itor",
-        password: "123456",
-        nickname: "itor.isaias",
-        email: "itor.isaias@gmail.com",
-        age: 22
-      }
+      user = Factory.User.insert(:user)
 
-      {:ok, %User{account: %Account{id: account_id}} = user} = Rocketpay.create_user(user_params)
-      Rocketpay.deposit(%{"id" => account_id, "value" => "50.0"})
+      Rocketpay.deposit(%{"id" => user.account.id, "value" => "50.0"})
 
       {:ok, token, _clains} = Guardian.encode_and_sign(user)
 
       conn = put_req_header(conn, "authorization", "Bearer #{token}")
 
-      {:ok, conn: conn, account_id: account_id}
+      {:ok, conn: conn, account_id: user.account.id}
     end
 
     test "when all params are valid, make the withdraw", %{conn: conn, account_id: account_id} do
@@ -101,31 +86,16 @@ defmodule RocketpayWeb.AccountsControllerTest do
 
   describe "transaction/v2" do
     setup %{conn: conn} do
-      {:ok, %User{account: %Account{id: from_account_id}} = user_1} =
-        Rocketpay.create_user(%{
-          name: "itor 1",
-          password: "123456",
-          nickname: "itor.isaias.1",
-          email: "itor.isaias.1@gmail.com",
-          age: 22
-        })
+      user_from = Factory.User.insert(:user)
+      user_to = Factory.User.insert(:user)
 
-      Rocketpay.deposit(%{"id" => from_account_id, "value" => "50.0"})
+      Rocketpay.deposit(%{"id" => user_from.account.id, "value" => "50.0"})
 
-      {:ok, %User{account: %Account{id: to_account_id}}} =
-        Rocketpay.create_user(%{
-          name: "itor 2",
-          password: "123456",
-          nickname: "itor.isaias.2",
-          email: "itor.isaias.2@gmail.com",
-          age: 22
-        })
-
-      {:ok, token, _clains} = Guardian.encode_and_sign(user_1)
+      {:ok, token, _clains} = Guardian.encode_and_sign(user_from)
 
       conn = put_req_header(conn, "authorization", "Bearer #{token}")
 
-      {:ok, conn: conn, from_account_id: from_account_id, to_account_id: to_account_id}
+      {:ok, conn: conn, from_account_id: user_from.account.id, to_account_id: user_to.account.id}
     end
 
     test "when are params valid, make the transaction", %{
@@ -148,11 +118,11 @@ defmodule RocketpayWeb.AccountsControllerTest do
                "message" => "Transaction done successfully",
                "transaction" => %{
                  "from_account" => %{
-                   "balance" => "49.00",
+                   "balance" => "49.0",
                    "id" => ^from_account_id
                  },
                  "to_account" => %{
-                   "balance" => "1.00",
+                   "balance" => "1.0",
                    "id" => ^to_account_id
                  }
                }

@@ -1,5 +1,7 @@
 defmodule Rocketpay.Factory.User do
   use ExMachina.Ecto, repo: Rocketpay.Repo
+
+  alias Argon2
   alias Rocketpay.{Account, User}
 
   def user_request_factory do
@@ -24,7 +26,7 @@ defmodule Rocketpay.Factory.User do
       password: password,
       password_hash: Argon2.hash_pwd_salt(password),
       account: %Account{
-        balance: Faker.random_between(18, 22) |> Integer.to_string() |> Decimal.new(),
+        balance: Decimal.new("00.0"),
         id: Ecto.UUID.generate()
       }
     }

@@ -1,11 +1,11 @@
 defmodule RocketpayWeb.UsersControllerTest do
   use RocketpayWeb.ConnCase, async: true
-  import Rocketpay.Factory.User
-  alias Rocketpay.User
+
+  alias Rocketpay.{User, Factory}
 
   describe "create/2" do
     test "when all params are valid, create user", %{conn: conn} do
-      params = build(:user_request)
+      params = Factory.User.build(:user_request)
       %{"name" => name, "nickname" => nickname} = params
 
       response =
@@ -26,9 +26,9 @@ defmodule RocketpayWeb.UsersControllerTest do
     end
 
     test "when trying to create a user with an existing email, return error", %{conn: conn} do
-      %User{email: email} = insert(:user)
+      %User{email: email} = Factory.User.insert(:user)
 
-      params = build(:user_request, %{"email" => email})
+      params = Factory.User.build(:user_request, %{"email" => email})
 
       response =
         conn
@@ -41,9 +41,9 @@ defmodule RocketpayWeb.UsersControllerTest do
     end
 
     test "when trying to create a user with an existing nickname, return error", %{conn: conn} do
-      %User{nickname: nickname} = insert(:user)
+      %User{nickname: nickname} = Factory.User.insert(:user)
 
-      params = build(:user_request, %{"nickname" => nickname})
+      params = Factory.User.build(:user_request, %{"nickname" => nickname})
 
       response =
         conn
@@ -56,7 +56,7 @@ defmodule RocketpayWeb.UsersControllerTest do
     end
 
     test "when the password is less than, return error", %{conn: conn} do
-      params = build(:user_request, %{"password" => "12345"})
+      params = Factory.User.build(:user_request, %{"password" => "12345"})
 
       response =
         conn
@@ -71,7 +71,7 @@ defmodule RocketpayWeb.UsersControllerTest do
 
   describe "sign_in/2" do
     test "when all params are valid, return a token", %{conn: conn} do
-      %User{email: email, password: password} = insert(:user)
+      %User{email: email, password: password} = Factory.User.insert(:user)
 
       params = %{"email" => email, "password" => password}
 
@@ -84,7 +84,7 @@ defmodule RocketpayWeb.UsersControllerTest do
     end
 
     test "when there are params invalid, return error", %{conn: conn} do
-      %User{email: email} = insert(:user)
+      %User{email: email} = Factory.User.insert(:user)
 
       params = %{"email" => email, "password" => "invalid_password"}
 

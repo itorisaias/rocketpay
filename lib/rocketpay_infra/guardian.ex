@@ -1,5 +1,6 @@
 defmodule RocketpayInfra.Guardian do
   use Guardian, otp_app: :rocketpay
+
   alias Rocketpay.{User, Repo}
 
   def subject_for_token(user = %User{}, _claims) do
