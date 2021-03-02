@@ -19,7 +19,6 @@ defmodule RocketpayWeb.Router do
     plug Guardian.Plug.EnsureAuthenticated
   end
 
-
   scope "/api", RocketpayWeb do
     pipe_through [:api, :auth]
 

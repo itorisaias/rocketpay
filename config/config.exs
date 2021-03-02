@@ -48,7 +48,8 @@ config :rocketpay, RocketpayInfra.Mailer,
 config :rocketpay, RocketpayInfra.Guardian,
   issuer: "rocketpay",
   secret_key: "yJOavDfJNezRx0QTW9t1IpXxPgDmAC0IMBlBLjyUpn80cFYnox8IFEfIqIuAHZqV"
-  # System.get_env("GUARDIAN_SECRET_KEY")
+
+# System.get_env("GUARDIAN_SECRET_KEY")
 
 config :argon2_elixir,
   t_cost: 1,

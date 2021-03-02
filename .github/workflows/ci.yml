@@ -1,21 +1,10 @@
 name: ci
+
 on: push
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
-    services:
-      db:
-        image: postgres:11
-        ports: ['5432:5432']
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -26,8 +15,100 @@ jobs:
           otp-version: '23'
           elixir-version: '1.11.1'
 
+      - name: Cache Elixir
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-elixir-deps
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: Install dependencies
         run: mix deps.get
       
-      - name: Test
-        run: mix test
+      - name: Lint
+        run: mix credo --strict
+  
+  check_format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          otp-version: '23.0'
+          elixir-version: '1.10.1'
+
+      - name: Cache Elixir
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-elixir-deps
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Fetch dependencies
+        run: mix deps.get
+
+      - name: Format check
+        run: mix format --check-formatted
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          otp-version: '23.0'
+          elixir-version: '1.10.1'
+
+      - name: Cache Elixir
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-elixir-deps
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}-test
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Integrating test
+        run: mix coveralls.json
+
+      - name: Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+    services:
+      pg:
+        image: postgres:12
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5

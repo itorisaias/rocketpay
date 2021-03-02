@@ -12,8 +12,7 @@ config :rocketpay, Rocketpay.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :rocketpay, RocketpayInfra.Mailer,
-  adapter: Bamboo.TestAdapter
+config :rocketpay, RocketpayInfra.Mailer, adapter: Bamboo.TestAdapter
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.

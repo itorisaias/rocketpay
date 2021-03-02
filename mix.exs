@@ -16,6 +16,7 @@ defmodule Rocketpay.MixProject do
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
+        "coveralls.json": :test,
         "coveralls.html": :test
       ]
     ]
@@ -51,17 +52,13 @@ defmodule Rocketpay.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:decimal, "~> 2.0"},
-
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:ex_machina, "~> 2.6.0", only: :test},
       {:faker, "~> 0.16", only: :test},
-
       {:argon2_elixir, "~> 2.0"},
-
       {:bamboo, "~> 1.7.0"},
       {:bamboo_smtp, "~> 3.1.3"},
-
       {:guardian, "~> 2.0"}
     ]
   end

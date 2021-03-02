@@ -1,6 +1,7 @@
 defmodule Rocketpay.Email do
   use Bamboo.Template,
     view: RocketpayWeb.Email.UserView
+
   import Bamboo.Email
   alias Rocketpay.User
 

@@ -1,6 +1,6 @@
 defmodule Rocketpay.Users.Create do
   alias Ecto.Multi
-  alias Rocketpay.{Account, Repo, User, Email}
+  alias Rocketpay.{Account, Email, Repo, User}
   alias RocketpayInfra.Mailer
 
   def call(params) do

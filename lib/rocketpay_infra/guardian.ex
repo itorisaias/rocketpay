@@ -11,7 +11,7 @@ defmodule RocketpayInfra.Guardian do
   def resource_from_claims(%{"sub" => id}) do
     case Repo.get(User, id) |> Repo.preload(:account) do
       nil -> {:error, :resource_not_found}
-      user -> {:ok,  user}
+      user -> {:ok, user}
     end
   end
 end

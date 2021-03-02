@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :rocketpay, Rocketpay.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "rocketpay_dev",
-  hostname: "localhost",
+  username: System.get_env("DATABASE_USERNAME") || "postgres",
+  password: System.get_env("DATABASE_PASSWORD") || "postgres",
+  database: System.get_env("DATABASE_DATABASE") || "rocketpay_dev",
+  hostname: System.get_env("DATABASE_HOSTNAME") || "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -22,8 +22,7 @@ config :rocketpay, RocketpayWeb.Endpoint,
   check_origin: false,
   watchers: []
 
-config :rocketpay, RocketpayInfra.Mailer,
-  adapter: Bamboo.LocalAdapter
+config :rocketpay, RocketpayInfra.Mailer, adapter: Bamboo.LocalAdapter
 
 # ## SSL Support
 #
