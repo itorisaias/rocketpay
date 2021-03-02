@@ -27,9 +27,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :rocketpay, :basic_auth,
-  username: "banana", # System.get_env("USERNAME")
-  password: "naninca123" # System.get_env("USERNAME")
+# config :rocketpay, :basic_auth,
+#   username: "banana", # System.get_env("USERNAME")
+#   password: "naninca123" # System.get_env("USERNAME")
 
 config :rocketpay, RocketpayInfra.Mailer,
   adapter: Bamboo.SMTPAdapter,
