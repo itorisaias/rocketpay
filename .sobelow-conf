@@ -7,6 +7,6 @@
   format: "txt",
   out: "",
   threshold: "low",
-  ignore: ["Config.CSP", "Config.HTTPS", "Config.CSRFRoute"],
+  ignore: ["Config.CSP", "Config.HTTPS", "Config.CSRFRoute", "Config.Secrets", "DOS.StringToAtom", "Traversal.FileModule"],
   ignore_files: []
 ]

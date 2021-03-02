@@ -1,7 +1,3 @@
-# In this file, we load production configuration and secrets
-# from environment variables. You can also hardcode secrets,
-# although such is generally not recommended and you have to
-# remember to add this file to your .gitignore.
 use Mix.Config
 
 database_url =
@@ -29,6 +25,49 @@ config :rocketpay, RocketpayWeb.Endpoint,
     transport_options: [socket_opts: [:inet6]]
   ],
   secret_key_base: secret_key_base
+
+guardian_secrety_key =
+  System.get_env("GUARDIAN_SECRET_KEY") ||
+    raise """
+    environment variable GUARDIAN_SECRET_KEY is missing.
+    You can generate one by calling: mix phx.gen.secret
+    """
+
+config :rocketpay, RocketpayInfra.Guardian,
+  issuer: "rocketpay",
+  secret_key: guardian_secrety_key
+
+mailer_hostname =
+  System.get_env("MAILER_HOSTNAME") ||
+    raise """
+    environment variable MAILER_HOSTNAME is missing.
+    """
+
+mailer_username =
+  System.get_env("MAILER_USERNAME") ||
+    raise """
+    environment variable MAILER_USERNAME is missing.
+    """
+
+mailer_password =
+  System.get_env("MAILER_PASSWORD") ||
+    raise """
+    environment variable MAILER_PASSWORD is missing.
+    """
+
+config :rocketpay, RocketpayInfra.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: mailer_hostname,
+  hostname: mailer_hostname,
+  port: String.to_integer(System.get_env("MAILER_PORT") || 587),
+  username: mailer_username,
+  password: mailer_password,
+  tls: :if_available,
+  allowed_tls_versions: [:tlsv1, :"tlsv1.1", :"tlsv1.2"],
+  ssl: false,
+  retries: 1,
+  no_mx_lookups: false,
+  auth: :if_available
 
 # ## Using releases (Elixir v1.9+)
 #
