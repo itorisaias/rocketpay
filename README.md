@@ -1,4 +1,4 @@
-# Rocketpay
+# RocketPay
 [![ci](https://github.com/itorisaias/rocketpay/actions/workflows/ci.yml/badge.svg)](https://github.com/itorisaias/rocketpay/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/itorisaias/rocketpay/branch/main/graph/badge.svg?token=DGBPFKZN56)](https://codecov.io/gh/itorisaias/rocketpay)
 
