@@ -4,6 +4,7 @@ defmodule Rocketpay.AwesomeApiTest do
   import Tesla.Mock
 
   alias Rocketpay.Quotes.Coin
+  alias RocketpayInfra.Quotes.AwesomeApi
 
   describe "fetch_coin/0" do
     setup do
@@ -16,7 +17,7 @@ defmodule Rocketpay.AwesomeApiTest do
     end
 
     test "when fetch coin without params return USD-BRL" do
-      {:ok, coin} = RocketpayInfra.Quotes.AwesomeApi.fetch_coin()
+      {:ok, coin} = AwesomeApi.fetch_coin()
 
       assert %Coin{from: "BRL", to: "USD"} = coin
     end
@@ -36,13 +37,13 @@ defmodule Rocketpay.AwesomeApiTest do
     end
 
     test "when fetch coin CAD return coin" do
-      {:ok, coin} = RocketpayInfra.Quotes.AwesomeApi.fetch_coin("CAD")
+      {:ok, coin} = AwesomeApi.fetch_coin("CAD")
 
       assert %Coin{from: "BRL", to: "CAD"} = coin
     end
 
     test "when fetch a coin that doesn't exist, return error" do
-      {:error, error} = RocketpayInfra.Quotes.AwesomeApi.fetch_coin("XXX")
+      {:error, error} = AwesomeApi.fetch_coin("XXX")
 
       assert error == "coin not found"
     end
@@ -65,19 +66,19 @@ defmodule Rocketpay.AwesomeApiTest do
     end
 
     test "when fetch coin CAD-USD return coin" do
-      {:ok, coin} = RocketpayInfra.Quotes.AwesomeApi.fetch_coin("CAD", "USD")
+      {:ok, coin} = AwesomeApi.fetch_coin("CAD", "USD")
 
       assert %Coin{from: "USD", to: "CAD"} = coin
     end
 
     test "when fetch coin USD-CAD return coin" do
-      {:ok, coin} = RocketpayInfra.Quotes.AwesomeApi.fetch_coin("USD", "CAD")
+      {:ok, coin} = AwesomeApi.fetch_coin("USD", "CAD")
 
       assert %Coin{to: "USD", from: "CAD"} = coin
     end
 
     test "when fetch a coin and one of them doesn't exist, return error" do
-      {:error, error} = RocketpayInfra.Quotes.AwesomeApi.fetch_coin("USD", "XXX")
+      {:error, error} = AwesomeApi.fetch_coin("USD", "XXX")
 
       assert error == "coin not found"
     end

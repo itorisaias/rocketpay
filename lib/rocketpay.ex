@@ -1,8 +1,8 @@
 defmodule Rocketpay do
+  alias Rocketpay.Accounts.{Deposit, Transaction, Withdraw}
+  alias Rocketpay.Quotes.CurrencyConverter
   alias Rocketpay.Users.Authenticate, as: UserAuthenticate
   alias Rocketpay.Users.Create, as: UserCreate
-  alias Rocketpay.Quotes.CurrencyConverter
-  alias Rocketpay.Accounts.{Deposit, Transaction, Withdraw}
 
   defdelegate create_user(params), to: UserCreate, as: :call
   defdelegate sign_in(params), to: UserAuthenticate, as: :call

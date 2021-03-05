@@ -9,7 +9,7 @@ defmodule RocketpayInfra.CachexCache do
     Cachex.put(@cache_name, key, value, opts)
   end
 
-  def current_state() do
+  def current_state do
     Cachex.keys!(@cache_name)
   end
 end
