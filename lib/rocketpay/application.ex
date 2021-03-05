@@ -14,9 +14,10 @@ defmodule Rocketpay.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Rocketpay.PubSub},
       # Start the Endpoint (http/https)
-      RocketpayWeb.Endpoint
+      RocketpayWeb.Endpoint,
       # Start a worker by calling: Rocketpay.Worker.start_link(arg)
       # {Rocketpay.Worker, arg}
+      {Cachex, name: :coin}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -26,6 +26,8 @@ config :argon2_elixir,
   t_cost: 1,
   m_cost: 8
 
+config :tesla, adapter: Tesla.Adapter.Hackney
+
 config :phoenix, :json_library, Jason
 
 import_config "#{Mix.env()}.exs"

@@ -14,6 +14,8 @@ config :rocketpay, Rocketpay.Repo,
 
 config :rocketpay, RocketpayInfra.Mailer, adapter: Bamboo.TestAdapter
 
+config :tesla, adapter: Tesla.Mock
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :rocketpay, RocketpayWeb.Endpoint,
