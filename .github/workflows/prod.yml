@@ -2,7 +2,7 @@ name: prod
 on: push
 jobs:
   deploy:
-    needs: [test]
+    # needs: [test]
     if: github.ref == 'refs/heads/main'
 
     runs-on: ubuntu-latest
