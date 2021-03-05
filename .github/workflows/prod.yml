@@ -2,7 +2,7 @@ name: prod
 on: push
 jobs:
   deploy:
-    # needs: test # Will only run if the test job succeeds
+    needs: [test]
     if: github.ref == 'refs/heads/main'
 
     runs-on: ubuntu-latest
