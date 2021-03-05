@@ -28,7 +28,7 @@ defmodule Rocketpay.MixProject do
   def application do
     [
       mod: {Rocketpay.Application, []},
-      extra_applications: [:logger, :runtime_tools, :cachex]
+      extra_applications: [:logger, :runtime_tools, :cachex, :bamboo]
     ]
   end
 
@@ -58,8 +58,8 @@ defmodule Rocketpay.MixProject do
       {:faker, "~> 0.16", only: :test},
       {:sobelow, "~> 0.8", only: :dev},
       {:argon2_elixir, "~> 2.0"},
-      {:bamboo, "~> 1.7.0"},
-      {:bamboo_smtp, "~> 3.1.3"},
+      {:bamboo, "~> 2.0.1"},
+      {:bamboo_smtp, "~> 4.0.0"},
       {:guardian, "~> 2.0"},
       {:cachex, "~> 3.3"},
       {:tesla, "~> 1.4.0"},
