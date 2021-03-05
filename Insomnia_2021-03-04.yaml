@@ -1,0 +1,246 @@
+_type: export
+__export_format: 4
+__export_date: 2021-03-05T02:37:55.802Z
+__export_source: insomnia.desktop.app:v2021.1.0
+resources:
+  - _id: req_cd97925c3f484f6a8708ed25010a3bee
+    parentId: wrk_aee8d372d31343e985d0582e39ef78f6
+    modified: 1614911758454
+    created: 1614910617076
+    url: "{{host}}/api/users"
+    name: sign up
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"age": 24,
+        	"email": "itor.isaias@gmail.com",
+        	"name": "Itor Isaias",
+        	"nickname": "itor.isaias",
+        	"password": "123456"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_8af541d2900d4d74bf4116de7e708c8b
+    authentication: {}
+    metaSortKey: -1614910617076
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_aee8d372d31343e985d0582e39ef78f6
+    parentId: null
+    modified: 1614910473939
+    created: 1614910473939
+    name: RocketPay
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_316394f15ec743f6bdf10aab730492df
+    parentId: wrk_aee8d372d31343e985d0582e39ef78f6
+    modified: 1614911754793
+    created: 1614910812767
+    url: "{{host}}/api/sign-in"
+    name: sign in
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "itor.isaias@gmail.com",
+        	"password": "123456"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_8af541d2900d4d74bf4116de7e708c8b
+    authentication: {}
+    metaSortKey: -1614667488561
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_dc168f3694ca46c0b20fb4d15d6705f1
+    parentId: wrk_aee8d372d31343e985d0582e39ef78f6
+    modified: 1614911751810
+    created: 1614910847884
+    url: "{{host}}/api/accounts/f55b1338-3e26-4cd0-8730-8ff574be2b8f/deposit"
+    name: deposit
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"value": "0.5"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_8af541d2900d4d74bf4116de7e708c8b
+      - name: Authorization
+        value: Bearer
+          eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJyb2NrZXRwYXkiLCJleHAiOjE2MTczMjkwMTUsImlhdCI6MTYxNDkwOTgxNSwiaXNzIjoicm9ja2V0cGF5IiwianRpIjoiMGU4Njk1ZWMtZjliZS00MTRjLWI1MWUtNjI2MWExYmZkNzEyIiwibmJmIjoxNjE0OTA5ODE0LCJzdWIiOiI1MDVmYmQxNy03ZmMwLTRkNmItOGNiMC1lYjdjOWUwODkyODEiLCJ0eXAiOiJhY2Nlc3MifQ.QDWjSht2hgo0RwJ2t3oYZDdhmBA9CNaxYnJwuLycNYlVASRn7-I-0dgB73k_kordUYs0kOffj4BXl1ZlSyuLdw
+        description: ""
+        id: pair_92dc1aefef014838b61ceb1db2f774c6
+      - name: ""
+        value: ""
+        description: ""
+        id: pair_ee8915fac6ba4183b4a5463a635b3dbd
+    authentication: {}
+    metaSortKey: -1614545924303.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2d48921acbc64c06a429ccd0c9fad2ac
+    parentId: wrk_aee8d372d31343e985d0582e39ef78f6
+    modified: 1614911748742
+    created: 1614911596586
+    url: "{{host}}/api/accounts/f55b1338-3e26-4cd0-8730-8ff574be2b8f/withdraw"
+    name: withdraw
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"value": "0.5"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_8af541d2900d4d74bf4116de7e708c8b
+      - name: Authorization
+        value: Bearer
+          eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJyb2NrZXRwYXkiLCJleHAiOjE2MTczMjkwMTUsImlhdCI6MTYxNDkwOTgxNSwiaXNzIjoicm9ja2V0cGF5IiwianRpIjoiMGU4Njk1ZWMtZjliZS00MTRjLWI1MWUtNjI2MWExYmZkNzEyIiwibmJmIjoxNjE0OTA5ODE0LCJzdWIiOiI1MDVmYmQxNy03ZmMwLTRkNmItOGNiMC1lYjdjOWUwODkyODEiLCJ0eXAiOiJhY2Nlc3MifQ.QDWjSht2hgo0RwJ2t3oYZDdhmBA9CNaxYnJwuLycNYlVASRn7-I-0dgB73k_kordUYs0kOffj4BXl1ZlSyuLdw
+        description: ""
+        id: pair_92dc1aefef014838b61ceb1db2f774c6
+      - name: ""
+        value: ""
+        description: ""
+        id: pair_ee8915fac6ba4183b4a5463a635b3dbd
+    authentication: {}
+    metaSortKey: -1614485142174.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bad7018926ed4ffeb2b88e9747a2d572
+    parentId: wrk_aee8d372d31343e985d0582e39ef78f6
+    modified: 1614911744647
+    created: 1614911629165
+    url: "{{host}}/api/accounts/transaction"
+    name: transaction
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"from_account": "f55b1338-3e26-4cd0-8730-8ff574be2b8f",
+        	"to_account": "7de15324-d509-446d-b1bb-1ac2af5efdb5",
+        	"value": "1"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_8af541d2900d4d74bf4116de7e708c8b
+      - name: Authorization
+        value: Bearer
+          eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJyb2NrZXRwYXkiLCJleHAiOjE2MTczMjkwMTUsImlhdCI6MTYxNDkwOTgxNSwiaXNzIjoicm9ja2V0cGF5IiwianRpIjoiMGU4Njk1ZWMtZjliZS00MTRjLWI1MWUtNjI2MWExYmZkNzEyIiwibmJmIjoxNjE0OTA5ODE0LCJzdWIiOiI1MDVmYmQxNy03ZmMwLTRkNmItOGNiMC1lYjdjOWUwODkyODEiLCJ0eXAiOiJhY2Nlc3MifQ.QDWjSht2hgo0RwJ2t3oYZDdhmBA9CNaxYnJwuLycNYlVASRn7-I-0dgB73k_kordUYs0kOffj4BXl1ZlSyuLdw
+        description: ""
+        id: pair_92dc1aefef014838b61ceb1db2f774c6
+      - name: ""
+        value: ""
+        description: ""
+        id: pair_ee8915fac6ba4183b4a5463a635b3dbd
+    authentication: {}
+    metaSortKey: -1614454751110.375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_9682172de3c58c927c4f239057a7bbbe0a540029
+    parentId: wrk_aee8d372d31343e985d0582e39ef78f6
+    modified: 1614910487379
+    created: 1614910474003
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1614910474003
+    _type: environment
+  - _id: jar_9682172de3c58c927c4f239057a7bbbe0a540029
+    parentId: wrk_aee8d372d31343e985d0582e39ef78f6
+    modified: 1614910474006
+    created: 1614910474006
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_54bdb6c2353d4c46b67f6e8e4904e9f0
+    parentId: wrk_aee8d372d31343e985d0582e39ef78f6
+    modified: 1614910473943
+    created: 1614910473943
+    fileName: RocketPay
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_af34db23f4c949a88339a9b0494cd64a
+    parentId: env_9682172de3c58c927c4f239057a7bbbe0a540029
+    modified: 1614910584568
+    created: 1614910495214
+    name: Dev
+    data:
+      host: http://localhost:4000
+    dataPropertyOrder:
+      "&":
+        - host
+    color: "#1b20ac"
+    isPrivate: false
+    metaSortKey: 1614910495214
+    _type: environment
+  - _id: env_6744ba062d6245b19307f1d6a1f51de7
+    parentId: env_9682172de3c58c927c4f239057a7bbbe0a540029
+    modified: 1614910572463
+    created: 1614910560053
+    name: Prod
+    data:
+      host: https://rocketpayy.gigalixirapp.com
+    dataPropertyOrder:
+      "&":
+        - host
+    color: "#3ab007"
+    isPrivate: false
+    metaSortKey: 1614910495264
+    _type: environment
