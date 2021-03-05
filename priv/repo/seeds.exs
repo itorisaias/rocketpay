@@ -1,11 +1,16 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Rocketpay.Repo.insert!(%Rocketpay.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias Rocketpay.{Repo, User, Account}
+
+%{id: user_id} = User.changeset(%{
+  "name" => "Itor Isaias",
+  "age" => "24",
+  "email" => "itor.isaias@gmail.com",
+  "password" => "123456",
+  "nickname" => "itor.isaias",
+})
+|> Repo.insert!()
+
+Account.changeset(%Account{}, %{
+  user_id: user_id,
+  balance: "50.0"
+})
+|> Repo.insert!()
