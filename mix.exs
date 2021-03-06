@@ -28,7 +28,7 @@ defmodule Rocketpay.MixProject do
   def application do
     [
       mod: {Rocketpay.Application, []},
-      extra_applications: [:logger, :runtime_tools, :cachex, :bamboo]
+      extra_applications: [:logger, :runtime_tools, :cachex]
     ]
   end
 
