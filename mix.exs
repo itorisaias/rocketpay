@@ -54,7 +54,7 @@ defmodule Rocketpay.MixProject do
       {:decimal, "~> 2.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
-      {:ex_machina, "~> 2.6.0", only: :test},
+      {:ex_machina, "~> 2.7.0", only: :test},
       {:faker, "~> 0.16", only: :test},
       {:sobelow, "~> 0.8", only: :dev},
       {:argon2_elixir, "~> 2.0"},
